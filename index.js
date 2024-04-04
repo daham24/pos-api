@@ -19,6 +19,9 @@ const app = express();
 
 // -----------------------------------
 const userRoute = require('./routes/UserRoutes');
+const customerRoute = require('./routes/CustomerRoute');
+const orderRoute = require('./routes/OrderRoute');
+const productRoute = require('./routes/ProductRoute');
 // -----------------------------------
 
 
@@ -42,3 +45,7 @@ app.get('/test-api', (req, res) => {
 
 // --------------
 app.use('/api/v1/users', userRoute);
+app.use('/api/v1/orders', orderRoute);
+app.use('/api/v1/products', productRoute);
+app.use('/api/v1/customers', customerRoute);
+
