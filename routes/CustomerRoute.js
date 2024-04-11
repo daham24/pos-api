@@ -4,7 +4,7 @@ const verifyUser = require('../middleware/AuthMiddleware');
 
 const router = express.Router();
 
-router.post('/create',verifyUser, customerController.create);
+router.post('/create', customerController.create);
 router.get('/findById',verifyUser, customerController.findById);
 router.put('/update',verifyUser, customerController.update);
 router.delete('/deleteById',verifyUser, customerController.deleteById);

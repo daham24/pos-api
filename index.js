@@ -11,11 +11,13 @@
 
 const express = require('express');
 const mongoose = require('mongoose');
-require('dotenv').config(); // invoke dotenv to load environment variables
+const cors = require('cors');
+require('dotenv').config();
 
 const bodyParser = require('body-parser');
 const port = process.env.SERVER_PORT || 3000;
 const app = express();
+app.use(cors())
 
 // -----------------------------------
 const userRoute = require('./routes/UserRoutes');
