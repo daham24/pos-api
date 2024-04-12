@@ -5,9 +5,9 @@ const verifyUser = require('../middleware/AuthMiddleware');
 const router = express.Router();
 
 router.post('/create', customerController.create);
-router.get('/findById',verifyUser, customerController.findById);
+router.get('/findById/:id', customerController.findById);
 router.put('/update',verifyUser, customerController.update);
-router.delete('/deleteById',verifyUser, customerController.deleteById);
-router.get('/findAll',verifyUser, customerController.findAll);
+router.delete('/deleteById/:id', customerController.deleteById);
+router.get('/findAll', customerController.findAll);
 
 module.exports = router;

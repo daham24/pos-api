@@ -14,11 +14,11 @@ const create = (req,res)=>{
     })
 }
 const findById = (req,res)=>{
-    (CustomerSchema.findOne({"_id": req.params._id})).then(selectedObj=>{
+    CustomerSchema.findOne({'_id': req.params._id}).then(selectedObj=>{
         if(selectedObj!=null){
             res.status(200).json({'data':selectedObj});
         }else {
-            return res.status(404).json({'message':'Customer Not Found!'})
+            return res.status(404).json({'message':'Customer Not Found!'});
         }
     })
 }
@@ -39,7 +39,7 @@ const update = async (req, res) => {
     }
 }
 const deleteById = async (req,res)=>{
-    const deleteData = await CustomerSchema.findOneAndDelete({'data': req.body.id});
+    const deleteData = await CustomerSchema.findByIdAndDelete({'_id': req.params.id});
 
     if (deleteData){
         return res.status(204).json({'message':'Deleted!'});
@@ -59,12 +59,16 @@ const findAll = (req,res)=>{
         }
 
         const skip = (pageNumber-1) * pageSize;
-
-        const data =  CustomerSchema.find(query)
+        console.log(skip)
+        CustomerSchema.find(query)
             .limit(pageSize)
-            .skip(skip);
-         return res.status(200).json(data);
+            .skip(skip).then(response=>{
+                return res.status(200).json(response);
+            })
+
+
     }catch (error){
+        console.log(error)
         return res.status(500).json({'message':'Internal Server Error'});
     }
 }
