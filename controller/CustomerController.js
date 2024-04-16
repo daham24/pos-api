@@ -14,12 +14,16 @@ const create = (req,res)=>{
     })
 }
 const findById = (req,res)=>{
-    CustomerSchema.findOne({'_id': req.params._id}).then(selectedObj=>{
+    const customerId = req.params.id;
+    CustomerSchema.findOne({'_id': customerId}).then(selectedObj=>{
         if(selectedObj!=null){
-            res.status(200).json({'data':selectedObj});
+           return res.status(200).json(selectedObj);
         }else {
             return res.status(404).json({'message':'Customer Not Found!'});
         }
+    }).catch(error=>{
+        console.log('Error finding customer:', error);
+        return res.status(500).json({'message':'Internal Server Error'})
     })
 }
 const update = async (req, res) => {
